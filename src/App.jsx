@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Summary from "./components/Summary.jsx";
+import ListCard from "./components/ListCard.jsx";
 
 function App() {
   const [listas, setListas] = useState([
@@ -14,7 +15,7 @@ function App() {
           <h1>Is She Right?</h1>
           <p>Tienes {listas.length} listas</p>
           {listas.map((lista) => (
-            <p key={lista.id}>{lista.nombre}</p>
+            <ListCard key={lista.id} lista={lista} />
           ))}
         </div>
         <Summary />

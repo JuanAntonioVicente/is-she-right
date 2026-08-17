@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Summary from "./components/Summary.jsx";
 import ListCard from "./components/ListCard.jsx";
+import ListForm from "./components/ListForm.jsx";
 
 function App() {
   const [listas, setListas] = useState([
@@ -22,6 +23,7 @@ function App() {
           {listas.map((lista) => (
             <ListCard key={lista.id} lista={lista} entradas={entradas} />
           ))}
+          <ListForm />
         </div>
         <Summary />
       </section>

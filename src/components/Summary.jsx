@@ -1,7 +1,7 @@
 function Summary() {
     return (
         <>
-        <h2>Resumen del mes</h2>
+            <h2>Resumen del mes</h2>
         </>
     );
 }

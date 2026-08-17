@@ -8,6 +8,11 @@ function App() {
     { id: 1, nombre: "Veces que no quiere", color: "green" },
     { id: 2, nombre: "Cozitas", color: "red" },
   ]);
+  const [entradas, setEntradas] = useState([
+    { id: 1, listaId: 1, fecha: "2026-08-23", puntuacion: 8 },
+    { id: 2, listaId: 2, fecha: "2026-08-24", puntuacion: 3 },
+    { id: 3, listaId: 2, fecha: "2026-08-25", puntuacion: 4 },
+  ]);
   return (
     <>
       <section id="center">
@@ -15,7 +20,7 @@ function App() {
           <h1>Is She Right?</h1>
           <p>Tienes {listas.length} listas</p>
           {listas.map((lista) => (
-            <ListCard key={lista.id} lista={lista} />
+            <ListCard key={lista.id} lista={lista} entradas={entradas} />
           ))}
         </div>
         <Summary />

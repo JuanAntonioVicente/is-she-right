@@ -14,6 +14,14 @@ function App() {
     { id: 2, listaId: 2, fecha: "2026-08-24", puntuacion: 3 },
     { id: 3, listaId: 2, fecha: "2026-08-25", puntuacion: 4 },
   ]);
+  function agregarLista(nombre, color) {
+    const nuevaLista = {
+      id: Date.now(),
+      nombre: nombre,
+      color: color,
+    };
+    setListas([...listas, nuevaLista]);
+  }
   return (
     <>
       <section id="center">
@@ -23,7 +31,7 @@ function App() {
           {listas.map((lista) => (
             <ListCard key={lista.id} lista={lista} entradas={entradas} />
           ))}
-          <ListForm />
+          <ListForm onCrear={agregarLista} />
         </div>
         <Summary />
       </section>

@@ -3,6 +3,7 @@ import "./App.css";
 import Summary from "./components/Summary.jsx";
 import ListCard from "./components/ListCard.jsx";
 import ListForm from "./components/ListForm.jsx";
+import EntryForm from "./components/EntryForm.jsx";
 
 function App() {
   const [listas, setListas] = useState([
@@ -14,6 +15,7 @@ function App() {
     { id: 2, listaId: 2, fecha: "2026-08-24", puntuacion: 3 },
     { id: 3, listaId: 2, fecha: "2026-08-25", puntuacion: 4 },
   ]);
+  const [listaSeleccionada, setListaSeleccionada] = useState(null);
   function agregarLista(nombre, color) {
     const nuevaLista = {
       id: Date.now(),
@@ -22,6 +24,18 @@ function App() {
     };
     setListas([...listas, nuevaLista]);
   }
+  function agregarEntrada(fecha, puntuacion) {
+    const nuevaEntrada = {
+      id: Date.now(),
+      listaId: listaSeleccionada,
+      fecha: fecha,
+      puntuacion: puntuacion,
+    };
+    setEntradas([...entradas, nuevaEntrada]);
+  }
+  const entradasFiltradas = entradas.filter(
+    (entrada) => entrada.listaId === listaSeleccionada
+  );
   return (
     <>
       <section id="center">
@@ -29,9 +43,18 @@ function App() {
           <h1>Is She Right?</h1>
           <p>Tienes {listas.length} listas</p>
           {listas.map((lista) => (
-            <ListCard key={lista.id} lista={lista} entradas={entradas} />
+            <ListCard key={lista.id} lista={lista} entradas={entradas} onSeleccionar={setListaSeleccionada} />
           ))}
           <ListForm onCrear={agregarLista} />
+          {listaSeleccionada && (
+            <div>
+              <h3>Entradas</h3>
+              {entradasFiltradas.map((entrada) => (
+                <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}</p>
+              ))}
+              <EntryForm onCrear={agregarEntrada} />
+            </div>
+          )}
         </div>
         <Summary />
       </section>

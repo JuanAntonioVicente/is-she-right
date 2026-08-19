@@ -1,10 +1,16 @@
-function ListCard({ lista, entradas }) {
+function ListCard({ lista, entradas, onSeleccionar }) {
     const total = entradas.filter((entrada) => entrada.listaId === lista.id).length
+    const estilos = {
+        borderLeft: "4px solid " + lista.color,
+        padding: "10px",
+        display: "flex",
+        justifyContent: "space-between"
+    };
     return (
-        <div style={{ borderLeft: "4px solid " + lista.color, padding: "10px", display: "flex", justifyContent: "space-between" }}>
+        <div onClick={() => onSeleccionar(lista.id)} style={estilos} >
             <span>{lista.nombre}</span>
             <span>{total}</span>
-        </div>
+        </div >
     )
 }
 

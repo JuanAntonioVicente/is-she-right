@@ -33,6 +33,9 @@ function App() {
     };
     setEntradas([...entradas, nuevaEntrada]);
   }
+  function borrarEntrada(id) {
+    setEntradas(entradas.filter((entrada) => entrada.id !== id));
+  }
   const entradasFiltradas = entradas.filter(
     (entrada) => entrada.listaId === listaSeleccionada
   );
@@ -50,7 +53,9 @@ function App() {
             <div>
               <h3>Entradas</h3>
               {entradasFiltradas.map((entrada) => (
-                <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}</p>
+                <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}
+                  <button onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
+                </p>
               ))}
               <EntryForm onCrear={agregarEntrada} />
             </div>

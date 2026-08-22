@@ -36,6 +36,10 @@ function App() {
   function borrarEntrada(id) {
     setEntradas(entradas.filter((entrada) => entrada.id !== id));
   }
+  function borrarLista(id) {
+    setListas(listas.filter((lista) => lista.id !== id));
+    setEntradas(entradas.filter((entrada) => entrada.listaId !== id));
+  }
   const entradasFiltradas = entradas.filter(
     (entrada) => entrada.listaId === listaSeleccionada
   );
@@ -46,7 +50,8 @@ function App() {
           <h1>Is She Right?</h1>
           <p>Tienes {listas.length} listas</p>
           {listas.map((lista) => (
-            <ListCard key={lista.id} lista={lista} entradas={entradas} onSeleccionar={setListaSeleccionada} />
+            <ListCard key={lista.id} lista={lista} entradas={entradas}
+              onSeleccionar={setListaSeleccionada} onBorrar={borrarLista} />
           ))}
           <ListForm onCrear={agregarLista} />
           {listaSeleccionada && (

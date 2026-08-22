@@ -1,4 +1,4 @@
-function ListCard({ lista, entradas, onSeleccionar }) {
+function ListCard({ lista, entradas, onSeleccionar, onBorrar }) {
     const total = entradas.filter((entrada) => entrada.listaId === lista.id).length
     const estilos = {
         borderLeft: "4px solid " + lista.color,
@@ -10,6 +10,10 @@ function ListCard({ lista, entradas, onSeleccionar }) {
         <div onClick={() => onSeleccionar(lista.id)} style={estilos} >
             <span>{lista.nombre}</span>
             <span>{total}</span>
+            <button onClick={(e) => {
+                e.stopPropagation();
+                onBorrar(lista.id);
+            }}>Borrar</button>
         </div >
     )
 }

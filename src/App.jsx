@@ -66,7 +66,7 @@ function App() {
             </div>
           )}
         </div>
-        <Summary />
+        <Summary listas={listas} entradas={entradas} />
       </section>
     </>
   );

@@ -4,6 +4,7 @@ import Summary from "./components/Summary.jsx";
 import ListCard from "./components/ListCard.jsx";
 import ListForm from "./components/ListForm.jsx";
 import EntryForm from "./components/EntryForm.jsx";
+import Calendar from "./components/Calendar.jsx";
 
 function App() {
   const [listas, setListas] = useState([
@@ -78,6 +79,7 @@ function App() {
           )}
         </div>
         <Summary listas={listas} entradas={entradas} />
+        <Calendar listas={listas} entradas={entradas} />
       </section>
     </>
   );

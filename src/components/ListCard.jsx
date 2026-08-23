@@ -1,4 +1,4 @@
-function ListCard({ lista, entradas, onSeleccionar, onBorrar }) {
+function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
     const total = entradas.filter((entrada) => entrada.listaId === lista.id).length
     const estilos = {
         borderLeft: "4px solid " + lista.color,
@@ -14,6 +14,10 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar }) {
                 e.stopPropagation();
                 onBorrar(lista.id);
             }}>Borrar</button>
+            <button onClick={(e) => {
+                e.stopPropagation();
+                onEditar(lista.id, "CAMBIADO");
+            }}>Editar</button>
         </div >
     )
 }

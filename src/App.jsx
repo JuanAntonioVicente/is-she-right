@@ -43,6 +43,16 @@ function App() {
   const entradasFiltradas = entradas.filter(
     (entrada) => entrada.listaId === listaSeleccionada
   );
+  function editarLista(id, nuevoNombre) {
+    setListas(
+      listas.map((lista) => {
+        if (lista.id === id) {
+          return { ...lista, nombre: nuevoNombre };
+        }
+        return lista;
+      })
+    );
+  }
   return (
     <>
       <section id="center">
@@ -51,7 +61,8 @@ function App() {
           <p>Tienes {listas.length} listas</p>
           {listas.map((lista) => (
             <ListCard key={lista.id} lista={lista} entradas={entradas}
-              onSeleccionar={setListaSeleccionada} onBorrar={borrarLista} />
+              onSeleccionar={setListaSeleccionada} onBorrar={borrarLista} 
+              onEditar={editarLista} />
           ))}
           <ListForm onCrear={agregarLista} />
           {listaSeleccionada && (

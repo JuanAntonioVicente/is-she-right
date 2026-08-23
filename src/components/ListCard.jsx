@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
     const total = entradas.filter((entrada) => entrada.listaId === lista.id).length
     const estilos = {
@@ -6,9 +8,13 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
         display: "flex",
         justifyContent: "space-between"
     };
+    const [editando, setEditando] = useState(false);
+    const [nombreEditado, setNombreEditado] = useState(lista.nombre);
     return (
         <div onClick={() => onSeleccionar(lista.id)} style={estilos} >
-            <span>{lista.nombre}</span>
+            {editando ?
+                <input type="text" value={nombreEditado} onChange={(e) => setNombreEditado(e.target.value)} />
+                : <span>{lista.nombre}</span>}
             <span>{total}</span>
             <button onClick={(e) => {
                 e.stopPropagation();
@@ -16,8 +22,15 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
             }}>Borrar</button>
             <button onClick={(e) => {
                 e.stopPropagation();
-                onEditar(lista.id, "CAMBIADO");
+                setEditando(true);
             }}>Editar</button>
+            {editando && (
+                <button onClick={(e) => {
+                    e.stopPropagation();
+                    onEditar(lista.id, nombreEditado);
+                    setEditando(false);
+                }}>Guardar</button>
+            )}
         </div >
     )
 }

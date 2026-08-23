@@ -10,6 +10,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
     };
     const [editando, setEditando] = useState(false);
     const [nombreEditado, setNombreEditado] = useState(lista.nombre);
+    const [confirmar, setConfirmar] = useState(false);
     return (
         <div onClick={() => onSeleccionar(lista.id)} style={estilos} >
             {editando ?
@@ -18,7 +19,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
             <span>{total}</span>
             <button onClick={(e) => {
                 e.stopPropagation();
-                onBorrar(lista.id);
+                setConfirmar(true);
             }}>Borrar</button>
             <button onClick={(e) => {
                 e.stopPropagation();
@@ -30,6 +31,19 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
                     onEditar(lista.id, nombreEditado);
                     setEditando(false);
                 }}>Guardar</button>
+            )}
+            {confirmar && (
+                <div>
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        onBorrar(lista.id);
+                        setConfirmar(false);
+                    }}>Confirmar</button>
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        setConfirmar(false);
+                    }}>Cancelar</button>
+                </div>
             )}
         </div >
     )

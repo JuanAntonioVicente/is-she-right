@@ -17,7 +17,7 @@ function Calendar({ listas, entradas }) {
     }
     const estiloCuadricula = {
         display: "grid",
-        gridTemplateColumns:"repeat(7,1fr)"
+        gridTemplateColumns: "repeat(7,1fr)"
     };
     const estiloCelda = {
         border: "1px solid #ccc",
@@ -30,9 +30,15 @@ function Calendar({ listas, entradas }) {
             <h2>{mes.toLocaleDateString("es-ES", { month: "long", year: "numeric" })}</h2>
             <button onClick={mesSiguiente}>Siguiente</button>
             <div style={estiloCuadricula}>
-                {dias.map((dia) => (
-                    <div style={estiloCelda} key={dia}>{dia}</div>
-                ))}
+                {dias.map((dia) => {
+                    const fecha = year + "-" + String(numeroMes + 1).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
+                    const encontrarEntradas = entradas.filter((mismaEntrada) => mismaEntrada.fecha === fecha);
+                    return <div style={estiloCelda} key={dia}>
+                        {dia}{encontrarEntradas.map((entradaDelDia) => {
+                            const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);
+                            return <div style={{ backgroundColor: laLista.color, height: "8px", marginTop: "2px" }}></div>;
+                        })}</div>
+                })}
             </div>
         </div>
     );

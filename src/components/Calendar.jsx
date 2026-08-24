@@ -24,19 +24,34 @@ function Calendar({ listas, entradas }) {
         padding: "10px",
         minHeight: "60px"
     };
+    const empezarMes = new Date(year, numeroMes, 1).getDay()
+    let huecos;
+    if (empezarMes === 0) {
+        huecos = 6
+    } else {
+        huecos = empezarMes - 1
+    }
+    const celdasVacias = [];
+    for (let i = 0; i < huecos; i++) {
+        celdasVacias.push(i)
+    }
     return (
         <div>
             <button onClick={mesAnterior}>Anterior</button>
             <h2>{mes.toLocaleDateString("es-ES", { month: "long", year: "numeric" })}</h2>
             <button onClick={mesSiguiente}>Siguiente</button>
             <div style={estiloCuadricula}>
+                {celdasVacias.map((huecosPintados) => (
+                    <div key={huecosPintados} style={estiloCelda}></div>
+                ))}
                 {dias.map((dia) => {
                     const fecha = year + "-" + String(numeroMes + 1).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
                     const encontrarEntradas = entradas.filter((mismaEntrada) => mismaEntrada.fecha === fecha);
                     return <div style={estiloCelda} key={dia}>
                         {dia}{encontrarEntradas.map((entradaDelDia) => {
                             const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);
-                            return <div style={{ backgroundColor: laLista.color, height: "8px", marginTop: "2px" }}></div>;
+                            return <div key={entradaDelDia.id}
+                                style={{ backgroundColor: laLista.color, height: "8px", marginTop: "2px" }}></div>;
                         })}</div>
                 })}
             </div>

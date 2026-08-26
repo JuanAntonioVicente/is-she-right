@@ -16,6 +16,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
     >
       {editando ? (
         <input
+          className="list-card-input"
           type="text"
           value={nombreEditado}
           onChange={(e) => setNombreEditado(e.target.value)}
@@ -23,60 +24,64 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
       ) : (
         <span className="list-card-nombre">{lista.nombre}</span>
       )}
-      <span className="list-card-total">{total}</span>
-      <button
-        className="list-card-boton"
-        onClick={(e) => {
-          e.stopPropagation();
-          setConfirmar(true);
-        }}
+      <div
+        className="list-card-acciones"
       >
-        Borrar
-      </button>
-      <button
-        className="list-card-boton"
-        onClick={(e) => {
-          e.stopPropagation();
-          setEditando(true);
-        }}
-      >
-        Editar
-      </button>
-      {editando && (
+        <span className="list-card-total">{total}</span>
         <button
           className="list-card-boton"
           onClick={(e) => {
             e.stopPropagation();
-            onEditar(lista.id, nombreEditado);
-            setEditando(false);
+            setConfirmar(true);
           }}
         >
-          Guardar
+          Borrar
         </button>
-      )}
-      {confirmar && (
-        <div>
-          <button
-            className="list-card-boton list-card-boton-peligro"
-            onClick={(e) => {
-              e.stopPropagation();
-              onBorrar(lista.id);
-              setConfirmar(false);
-            }}
-          >
-            Confirmar
-          </button>
+        <button
+          className="list-card-boton"
+          onClick={(e) => {
+            e.stopPropagation();
+            setEditando(true);
+          }}
+        >
+          Editar
+        </button>
+        {editando && (
           <button
             className="list-card-boton"
             onClick={(e) => {
               e.stopPropagation();
-              setConfirmar(false);
+              onEditar(lista.id, nombreEditado);
+              setEditando(false);
             }}
           >
-            Cancelar
+            Guardar
           </button>
-        </div>
-      )}
+        )}
+        {confirmar && (
+          <div>
+            <button
+              className="list-card-boton list-card-boton-peligro"
+              onClick={(e) => {
+                e.stopPropagation();
+                onBorrar(lista.id);
+                setConfirmar(false);
+              }}
+            >
+              Confirmar
+            </button>
+            <button
+              className="list-card-boton"
+              onClick={(e) => {
+                e.stopPropagation();
+                setConfirmar(false);
+              }}
+            >
+              Cancelar
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

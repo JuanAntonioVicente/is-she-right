@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Calendar.css";
 
 function Calendar({ listas, entradas }) {
     const [mes, setMes] = useState(new Date())
@@ -15,15 +16,6 @@ function Calendar({ listas, entradas }) {
     for (let i = 1; i <= diasDelMes; i++) {
         dias.push(i);
     }
-    const estiloCuadricula = {
-        display: "grid",
-        gridTemplateColumns: "repeat(7,1fr)"
-    };
-    const estiloCelda = {
-        border: "1px solid #ccc",
-        padding: "10px",
-        minHeight: "60px"
-    };
     const empezarMes = new Date(year, numeroMes, 1).getDay()
     let huecos;
     if (empezarMes === 0) {
@@ -37,22 +29,43 @@ function Calendar({ listas, entradas }) {
     }
     return (
         <div>
-            <button onClick={mesAnterior}>Anterior</button>
-            <h2>{mes.toLocaleDateString("es-ES", { month: "long", year: "numeric" })}</h2>
-            <button onClick={mesSiguiente}>Siguiente</button>
-            <div style={estiloCuadricula}>
+            <div className="calendar-cabecera">
+                <span className="calendar-mes">
+                    {mes.toLocaleDateString("es-ES", { month: "long", year: "numeric" })}
+                </span>
+                <span>
+                    <button className="calendar-nav" onClick={mesAnterior}>‹</button>
+                    <button className="calendar-nav" onClick={mesSiguiente}>›</button>
+                </span>
+            </div>
+            <div className="calendar-semana">
+                <div className="calendar-inicial">L</div>
+                <div className="calendar-inicial">M</div>
+                <div className="calendar-inicial">X</div>
+                <div className="calendar-inicial">J</div>
+                <div className="calendar-inicial">V</div>
+                <div className="calendar-inicial">S</div>
+                <div className="calendar-inicial">D</div>
+            </div>
+            <div className="calendar-grid">
                 {celdasVacias.map((huecosPintados) => (
-                    <div key={huecosPintados} style={estiloCelda}></div>
+                    <div key={huecosPintados} className="calendar-celda-vacia"></div>
                 ))}
                 {dias.map((dia) => {
                     const fecha = year + "-" + String(numeroMes + 1).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
                     const encontrarEntradas = entradas.filter((mismaEntrada) => mismaEntrada.fecha === fecha);
-                    return <div style={estiloCelda} key={dia}>
-                        {dia}{encontrarEntradas.map((entradaDelDia) => {
-                            const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);
-                            return <div key={entradaDelDia.id}
-                                style={{ backgroundColor: laLista.color, height: "8px", marginTop: "2px" }}></div>;
-                        })}</div>
+                    return (
+                        <div className="calendar-celda" key={dia}>
+                            <div className="calendar-dia">{dia}</div>
+                            {encontrarEntradas.map((entradaDelDia) => {
+                                const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);
+                                return (
+                                    <div className="calendar-marca" key={entradaDelDia.id}
+                                        style={{ backgroundColor: laLista.color }}></div>
+                                );
+                            })}
+                        </div>
+                    );
                 })}
             </div>
         </div>

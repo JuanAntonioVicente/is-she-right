@@ -39,3 +39,18 @@
   border-color: #E24B4A;
   color: #E24B4A;
 }
+
+.list-card-input {
+  background-color: #0f1115;
+  border: 1px solid #6d5ce7;
+  border-radius: 6px;
+  color: #e8e8ea;
+  font-size: 14px;
+  padding: 4px 8px;
+  font-family: inherit;
+}
+
+.list-card-input:focus {
+  outline: none;
+  border-color: #9b8ef0;
+}

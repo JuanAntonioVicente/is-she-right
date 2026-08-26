@@ -1,0 +1,27 @@
+.summary-titulo {
+  font-size: 12px;
+  color: #8b8f96;
+  margin-bottom: 8px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.summary-card {
+  background-color: #1a1d24;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.summary-nombre {
+  font-size: 12px;
+  color: #8b8f96;
+}
+
+.summary-total {
+  font-size: 22px;
+  font-weight: 500;
+}

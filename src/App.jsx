@@ -67,12 +67,13 @@ function App() {
       </div>
       <ListForm onCrear={agregarLista} />
       {listaSeleccionada && (
-        <div>
-          <h3>Entradas</h3>
+        <div className="entradas-panel">
+          <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
-            <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}
-              <button onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
-            </p>
+            <div className="entrada-fila" key={entrada.id}>
+              <span className="entrada-texto">{entrada.fecha} - Puntuación {entrada.puntuacion}</span>
+              <button className="entrada-borrar" onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
+            </div>
           ))}
           <EntryForm onCrear={agregarEntrada} />
         </div>

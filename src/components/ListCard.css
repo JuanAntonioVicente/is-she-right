@@ -13,10 +13,17 @@
   color: #e8e8ea;
 }
 
+.list-card-acciones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .list-card-total {
   font-size: 17px;
   font-weight: 500;
   color: #e8e8ea;
+  margin-right: 4px;
 }
 
 .list-card-boton {
@@ -24,9 +31,9 @@
   border: 1px solid #2f333c;
   border-radius: 6px;
   color: #8b8f96;
+  font-family: inherit;
   font-size: 12px;
   padding: 4px 10px;
-  margin-left: 6px;
   cursor: pointer;
 }
 
@@ -40,14 +47,19 @@
   color: #E24B4A;
 }
 
+.list-card-confirmar {
+  display: flex;
+  gap: 10px;
+}
+
 .list-card-input {
   background-color: #0f1115;
   border: 1px solid #6d5ce7;
   border-radius: 6px;
   color: #e8e8ea;
+  font-family: inherit;
   font-size: 14px;
   padding: 4px 8px;
-  font-family: inherit;
 }
 
 .list-card-input:focus {

@@ -7,6 +7,7 @@
 }
 
 .entry-form-input {
+  color-scheme: dark;
   background-color: #1a1d24;
   border: 1px solid #2f333c;
   border-radius: 6px;
@@ -23,6 +24,11 @@
 
 .entry-form-puntuacion {
   width: 70px;
+}
+
+.entry-form-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
 }
 
 .entry-form-boton {

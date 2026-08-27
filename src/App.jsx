@@ -55,33 +55,31 @@ function App() {
     );
   }
   return (
-    <>
-      <section id="center">
+    <div className="app">
+      <h1 className="app-titulo">Is She Right?</h1>
+      <p className="app-subtitulo">Tienes {listas.length} listas</p>
+      <div className="app-listas">
+        {listas.map((lista) => (
+          <ListCard key={lista.id} lista={lista} entradas={entradas}
+            onSeleccionar={setListaSeleccionada} onBorrar={borrarLista}
+            onEditar={editarLista} />
+        ))}
+      </div>
+      <ListForm onCrear={agregarLista} />
+      {listaSeleccionada && (
         <div>
-          <h1>Is She Right?</h1>
-          <p>Tienes {listas.length} listas</p>
-          {listas.map((lista) => (
-            <ListCard key={lista.id} lista={lista} entradas={entradas}
-              onSeleccionar={setListaSeleccionada} onBorrar={borrarLista} 
-              onEditar={editarLista} />
+          <h3>Entradas</h3>
+          {entradasFiltradas.map((entrada) => (
+            <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}
+              <button onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
+            </p>
           ))}
-          <ListForm onCrear={agregarLista} />
-          {listaSeleccionada && (
-            <div>
-              <h3>Entradas</h3>
-              {entradasFiltradas.map((entrada) => (
-                <p key={entrada.id}>{entrada.fecha} - Puntuación {entrada.puntuacion}
-                  <button onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
-                </p>
-              ))}
-              <EntryForm onCrear={agregarEntrada} />
-            </div>
-          )}
+          <EntryForm onCrear={agregarEntrada} />
         </div>
-        <Summary listas={listas} entradas={entradas} />
-        <Calendar listas={listas} entradas={entradas} />
-      </section>
-    </>
+      )}
+      <Summary listas={listas} entradas={entradas} />
+      <Calendar listas={listas} entradas={entradas} />
+    </div>
   );
 }
 

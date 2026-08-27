@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./EntryForm.css";
 
 function EntryForm({ onCrear }) {
     const [fecha, setFecha] = useState("");
@@ -15,11 +16,11 @@ function EntryForm({ onCrear }) {
         setError("");
     }
     return (
-        <div>
-            <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
-            <input type="number" min="0" max="10" value={puntuacion} onChange={(e) => setPuntuacion(e.target.value)} />
-            <button onClick={handleSubmit}>Añadir entrada</button>
-            {error && <p>{error}</p>}
+        <div className="entry-form">
+            <input className="entry-form-input" type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+            <input className="entry-form-input entry-form-puntuacion" type="number" min="0" max="10" value={puntuacion} onChange={(e) => setPuntuacion(e.target.value)} />
+            <button className="entry-form-boton" onClick={handleSubmit}>Añadir entrada</button>
+            {error && <p className="entry-form-error">{error}</p>}
         </div>
     )
 }

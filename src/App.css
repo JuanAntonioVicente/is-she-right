@@ -18,6 +18,12 @@
   margin: 2px 0 1.5rem 0;
 }
 
+.app-vacio {
+  font-size: 15px;
+  color: #e8e8ea;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
 .app-listas {
   margin-bottom: 1.75rem;
 }

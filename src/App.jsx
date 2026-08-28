@@ -34,6 +34,9 @@ function App() {
   function borrarLista(id) {
     setListas(listas.filter((lista) => lista.id !== id));
     setEntradas(entradas.filter((entrada) => entrada.listaId !== id));
+    if (id === listaSeleccionada) {
+      setListaSeleccionada(null);
+    }
   }
   const entradasFiltradas = entradas.filter(
     (entrada) => entrada.listaId === listaSeleccionada
@@ -48,6 +51,8 @@ function App() {
       })
     );
   }
+  const listaActual = listas.find((lista) => lista.id === listaSeleccionada);
+
   return (
     <div className="app">
       <h1 className="app-titulo">Is She Right?</h1>
@@ -63,12 +68,18 @@ function App() {
       </div>
       <ListForm onCrear={agregarLista} />
       {listaSeleccionada && (
-        <div className="entradas-panel">
+        <div className="entradas-panel" style={{ borderLeft: "3px solid" + listaActual.color }}>
           <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
             <div className="entrada-fila" key={entrada.id}>
-              <span className="entrada-texto">{entrada.fecha} - {entrada.nombre} - Puntuación {entrada.puntuacion}</span>
-              <button className="entrada-borrar" onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
+              <span className="entrada-texto">
+                <span className="entrada-fecha">{entrada.fecha}</span>
+                <span className="entrada-nombre">{entrada.nombre}</span>
+              </span>
+              <span className="entrada-derecha">
+                <span className="entrada-puntuacion">{entrada.puntuacion}</span>
+                <button className="entrada-borrar" onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
+              </span>
             </div>
           ))}
           <EntryForm onCrear={agregarEntrada} />
@@ -79,5 +90,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -41,6 +41,10 @@
   padding: 5px 6px;
 }
 
+.calendar-celda-hoy {
+  outline: 1.5px solid #6d5ce7;
+}
+
 .calendar-celda-vacia {
   background-color: #15171d;
   border-radius: 6px;

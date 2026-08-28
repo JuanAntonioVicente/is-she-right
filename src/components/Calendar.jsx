@@ -11,6 +11,10 @@ function Calendar({ listas, entradas }) {
     }
     const year = mes.getFullYear();
     const numeroMes = mes.getMonth();
+    const hoy = new Date();
+    const yearHoy = hoy.getFullYear();
+    const mesHoy = hoy.getMonth();
+    const diaHoy = hoy.getDate();
     const diasDelMes = new Date(year, numeroMes + 1, 0).getDate()
     const dias = [];
     for (let i = 1; i <= diasDelMes; i++) {
@@ -54,8 +58,9 @@ function Calendar({ listas, entradas }) {
                 {dias.map((dia) => {
                     const fecha = year + "-" + String(numeroMes + 1).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
                     const encontrarEntradas = entradas.filter((mismaEntrada) => mismaEntrada.fecha === fecha);
+                    const esHoy = year === yearHoy && numeroMes === mesHoy && dia === diaHoy;
                     return (
-                        <div className="calendar-celda" key={dia}>
+                        <div className={"calendar-celda " + (esHoy ? " calendar-celda-hoy" : "")} key={dia}>
                             <div className="calendar-dia">{dia}</div>
                             {encontrarEntradas.map((entradaDelDia) => {
                                 const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);

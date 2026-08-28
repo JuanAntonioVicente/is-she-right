@@ -1,8 +1,6 @@
-import { useState } from "react";
 import "./Calendar.css";
 
-function Calendar({ listas, entradas }) {
-    const [mes, setMes] = useState(new Date())
+function Calendar({ listas, entradas, mes, setMes}) {
     function mesAnterior() {
         setMes(new Date(mes.getFullYear(), mes.getMonth() - 1, 1))
     }

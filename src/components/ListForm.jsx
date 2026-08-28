@@ -3,7 +3,7 @@ import "./ListForm.css";
 
 function ListForm({ onCrear }) {
     const [nombre, setNombre] = useState("");
-    const [color, setColor] = useState("#008000");
+    const [color, setColor] = useState("#4A9DD9");
     function handleSubmit() {
         if (nombre.trim() === "") {
             return;

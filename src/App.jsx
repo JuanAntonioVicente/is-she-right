@@ -10,6 +10,7 @@ function App() {
   const [listas, setListas] = useState([]);
   const [entradas, setEntradas] = useState([]);
   const [listaSeleccionada, setListaSeleccionada] = useState(null);
+  const [mes, setMes] = useState(new Date())
   function agregarLista(nombre, color) {
     const nuevaLista = {
       id: Date.now(),
@@ -85,8 +86,8 @@ function App() {
           <EntryForm onCrear={agregarEntrada} />
         </div>
       )}
-      <Summary listas={listas} entradas={entradas} />
-      <Calendar listas={listas} entradas={entradas} />
+      <Summary listas={listas} entradas={entradas} mes={mes} />
+      <Calendar listas={listas} entradas={entradas} mes={mes} setMes={setMes}/>
     </div>
   );
 }

@@ -18,10 +18,11 @@ function App() {
     };
     setListas([...listas, nuevaLista]);
   }
-  function agregarEntrada(fecha, puntuacion) {
+  function agregarEntrada(fecha, puntuacion, nombre) {
     const nuevaEntrada = {
       id: Date.now(),
       listaId: listaSeleccionada,
+      nombre: nombre,
       fecha: fecha,
       puntuacion: puntuacion,
     };
@@ -50,7 +51,9 @@ function App() {
   return (
     <div className="app">
       <h1 className="app-titulo">Is She Right?</h1>
-      {listas.length > 0 ? <p className="app-subtitulo">Tienes {listas.length} {listas.length === 1 ? "lista" : "listas"}</p> : <p className="app-vacio">No tienes ninguna lista...</p>}
+      {listas.length > 0 ? <p className="app-subtitulo">
+        Tienes {listas.length} {listas.length === 1 ? "lista" : "listas"}
+      </p> : <p className="app-vacio">No tienes ninguna lista...</p>}
       <div className="app-listas">
         {listas.map((lista) => (
           <ListCard key={lista.id} lista={lista} entradas={entradas}
@@ -64,7 +67,7 @@ function App() {
           <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
             <div className="entrada-fila" key={entrada.id}>
-              <span className="entrada-texto">{entrada.fecha} - Puntuación {entrada.puntuacion}</span>
+              <span className="entrada-texto">{entrada.fecha} - {entrada.nombre} - Puntuación {entrada.puntuacion}</span>
               <button className="entrada-borrar" onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
             </div>
           ))}

@@ -2,9 +2,7 @@ import { useState } from "react";
 import "./ListCard.css";
 
 function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
-  const total = entradas.filter(
-    (entrada) => entrada.listaId === lista.id
-  ).length;
+  const total = entradas.filter((entrada) => entrada.listaId === lista.id).length;
   const [editando, setEditando] = useState(false);
   const [nombreEditado, setNombreEditado] = useState(lista.nombre);
   const [confirmar, setConfirmar] = useState(false);
@@ -12,8 +10,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
     <div
       onClick={() => onSeleccionar(lista.id)}
       className="list-card"
-      style={{ borderLeft: "4px solid " + lista.color }}
-    >
+      style={{ borderLeft: "4px solid " + lista.color }}>
       {editando ? (
         <input
           className="list-card-input"
@@ -24,17 +21,14 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
       ) : (
         <span className="list-card-nombre">{lista.nombre}</span>
       )}
-      <div
-        className="list-card-acciones"
-      >
+      <div className="list-card-acciones">
         <span className="list-card-total">{total}</span>
         <button
           className="list-card-boton"
           onClick={(e) => {
             e.stopPropagation();
             setConfirmar(true);
-          }}
-        >
+          }}>
           Borrar
         </button>
         <button
@@ -42,8 +36,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
           onClick={(e) => {
             e.stopPropagation();
             setEditando(true);
-          }}
-        >
+          }}>
           Editar
         </button>
         {editando && (
@@ -53,8 +46,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
               e.stopPropagation();
               onEditar(lista.id, nombreEditado);
               setEditando(false);
-            }}
-          >
+            }}>
             Guardar
           </button>
         )}
@@ -66,8 +58,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
                 e.stopPropagation();
                 onBorrar(lista.id);
                 setConfirmar(false);
-              }}
-            >
+              }}>
               Confirmar
             </button>
             <button
@@ -75,8 +66,7 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
               onClick={(e) => {
                 e.stopPropagation();
                 setConfirmar(false);
-              }}
-            >
+              }}>
               Cancelar
             </button>
           </div>

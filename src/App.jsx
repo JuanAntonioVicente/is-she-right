@@ -5,12 +5,13 @@ import ListCard from "./components/ListCard.jsx";
 import ListForm from "./components/ListForm.jsx";
 import EntryForm from "./components/EntryForm.jsx";
 import Calendar from "./components/Calendar.jsx";
+import EntryCard from "./components/EntryCard.jsx";
 
 function App() {
   const [listas, setListas] = useState([]);
   const [entradas, setEntradas] = useState([]);
   const [listaSeleccionada, setListaSeleccionada] = useState(null);
-  const [mes, setMes] = useState(new Date())
+  const [mes, setMes] = useState(new Date());
   function agregarLista(nombre, color) {
     const nuevaLista = {
       id: Date.now(),
@@ -39,9 +40,7 @@ function App() {
       setListaSeleccionada(null);
     }
   }
-  const entradasFiltradas = entradas.filter(
-    (entrada) => entrada.listaId === listaSeleccionada
-  );
+  const entradasFiltradas = entradas.filter((entrada) => entrada.listaId === listaSeleccionada);
   function editarLista(id, nuevoNombre) {
     setListas(
       listas.map((lista) => {
@@ -53,18 +52,42 @@ function App() {
     );
   }
   const listaActual = listas.find((lista) => lista.id === listaSeleccionada);
+  function editarEntradas(id, nuevoNombre, nuevaFecha, nuevaPuntuacion) {
+    setEntradas(
+      entradas.map((entrada) => {
+        if (entrada.id === id) {
+          return {
+            ...entrada,
+            nombre: nuevoNombre,
+            fecha: nuevaFecha,
+            puntuacion: nuevaPuntuacion,
+          };
+        }
+        return entrada;
+      })
+    );
+  }
 
   return (
     <div className="app">
       <h1 className="app-titulo">Is She Right?</h1>
-      {listas.length > 0 ? <p className="app-subtitulo">
-        Tienes {listas.length} {listas.length === 1 ? "lista" : "listas"}
-      </p> : <p className="app-vacio">No tienes ninguna lista...</p>}
+      {listas.length > 0 ? (
+        <p className="app-subtitulo">
+          Tienes {listas.length} {listas.length === 1 ? "lista" : "listas"}
+        </p>
+      ) : (
+        <p className="app-vacio">No tienes ninguna lista...</p>
+      )}
       <div className="app-listas">
         {listas.map((lista) => (
-          <ListCard key={lista.id} lista={lista} entradas={entradas}
-            onSeleccionar={setListaSeleccionada} onBorrar={borrarLista}
-            onEditar={editarLista} />
+          <ListCard
+            key={lista.id}
+            lista={lista}
+            entradas={entradas}
+            onSeleccionar={setListaSeleccionada}
+            onBorrar={borrarLista}
+            onEditar={editarLista}
+          />
         ))}
       </div>
       <ListForm onCrear={agregarLista} />
@@ -72,22 +95,13 @@ function App() {
         <div className="entradas-panel" style={{ borderLeft: "3px solid" + listaActual.color }}>
           <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
-            <div className="entrada-fila" key={entrada.id}>
-              <span className="entrada-texto">
-                <span className="entrada-fecha">{entrada.fecha}</span>
-                <span className="entrada-nombre">{entrada.nombre}</span>
-              </span>
-              <span className="entrada-derecha">
-                <span className="entrada-puntuacion">{entrada.puntuacion}</span>
-                <button className="entrada-borrar" onClick={() => borrarEntrada(entrada.id)}>Borrar</button>
-              </span>
-            </div>
+            <EntryCard key={entrada.id} entrada={entrada} onBorrar={borrarEntrada} onEditar={editarEntradas} />
           ))}
           <EntryForm onCrear={agregarEntrada} />
         </div>
       )}
       <Summary listas={listas} entradas={entradas} mes={mes} />
-      <Calendar listas={listas} entradas={entradas} mes={mes} setMes={setMes}/>
+      <Calendar listas={listas} entradas={entradas} mes={mes} setMes={setMes} />
     </div>
   );
 }

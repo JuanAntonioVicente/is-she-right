@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Summary from "./components/Summary.jsx";
 import ListCard from "./components/ListCard.jsx";
@@ -22,12 +22,13 @@ function App() {
     };
     setListas([...listas, nuevaLista]);
   }
-  function agregarEntrada(fecha, puntuacion, nombre) {
+  function agregarEntrada(fecha, nombre, tiempo, puntuacion) {
     const nuevaEntrada = {
       id: Date.now(),
       listaId: listaSeleccionada,
-      nombre: nombre,
       fecha: fecha,
+      nombre: nombre,
+      tiempo: tiempo,
       puntuacion: puntuacion,
     };
     setEntradas([...entradas, nuevaEntrada]);
@@ -54,14 +55,15 @@ function App() {
     );
   }
   const listaActual = listas.find((lista) => lista.id === listaSeleccionada);
-  function editarEntradas(id, nuevoNombre, nuevaFecha, nuevaPuntuacion) {
+  function editarEntradas(id, nuevaFecha, nuevoNombre, nuevoTiempo, nuevaPuntuacion) {
     setEntradas(
       entradas.map((entrada) => {
         if (entrada.id === id) {
           return {
             ...entrada,
-            nombre: nuevoNombre,
             fecha: nuevaFecha,
+            nombre: nuevoNombre,
+            tiempo: nuevoTiempo,
             puntuacion: nuevaPuntuacion,
           };
         }

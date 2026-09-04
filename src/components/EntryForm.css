@@ -26,6 +26,10 @@
   width: 70px;
 }
 
+.entry-form-tiempo {
+  width: 70px;
+}
+
 .entry-form-input::-webkit-calendar-picker-indicator {
   filter: invert(0.6);
   cursor: pointer;

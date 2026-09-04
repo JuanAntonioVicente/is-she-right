@@ -3,27 +3,33 @@ import "./EntryForm.css";
 
 function EntryForm({ onCrear }) {
     const [fecha, setFecha] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [tiempo, setTiempo] = useState("");
     const [puntuacion, setPuntuacion] = useState("");
     const [error, setError] = useState("");
-    const [nombre, setNombre] = useState("");
     function handleSubmit() {
-        if (fecha === "" || puntuacion === "" || nombre === "" || Number(puntuacion) < 0 || Number(puntuacion) > 10) {
+        if (fecha === "" || nombre === "" || puntuacion === "" ||
+            Number(puntuacion) < 0 || Number(puntuacion) > 10) {
             setError("Debes poner una fecha, nombre y puntuación correctas.");
             return;
         }
-        onCrear(fecha, puntuacion, nombre);
+        onCrear(fecha, nombre, tiempo, puntuacion);
         setFecha("");
+        setNombre("");
+        setTiempo("");
         setPuntuacion("");
         setError("");
-        setNombre("");
     }
     return (
         <div className="entry-form">
             <input className="entry-form-input" type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
             <input className="entry-form-input" type="text"
                 placeholder="Nombre de la entrada" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <input className="entry-form-input entry-form-tiempo"
+                placeholder="Horas" type="number" min="0" max="" value={tiempo}
+                onChange={(e) => setTiempo(e.target.value)} />
             <input className="entry-form-input entry-form-puntuacion"
-                placeholder="0 - 10" type="number" min="0" max="10" value={puntuacion}
+                placeholder="0 - 10" type="number" min="0" value={puntuacion}
                 onChange={(e) => setPuntuacion(e.target.value)} />
             <button className="entry-form-boton" onClick={handleSubmit}>Añadir entrada</button>
             {error && <p className="entry-form-error">{error}</p>}

@@ -32,6 +32,12 @@
   color: #e8e8ea;
 }
 
+.entrada-tiempo {
+  font-size: 15px;
+  font-weight: 500;
+  color: #e8e8ea;
+}
+
 .entrada-derecha {
   display: flex;
   align-items: center;
@@ -62,6 +68,10 @@
 }
 
 .entrada-input-puntuacion {
+  width: 60px;
+}
+
+.entrada-input-tiempo {
   width: 60px;
 }
 

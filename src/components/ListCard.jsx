@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./ListCard.css";
 
-function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
+function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar, listaEnEdicion, setListaEnEdicion }) {
   const total = entradas.filter((entrada) => entrada.listaId === lista.id).length;
-  const [editando, setEditando] = useState(false);
   const [nombreEditado, setNombreEditado] = useState(lista.nombre);
   const [confirmar, setConfirmar] = useState(false);
+  const editando = listaEnEdicion === lista.id;
   return (
     <div
       onClick={() => onSeleccionar(lista.id)}
@@ -23,37 +23,50 @@ function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar }) {
       )}
       <div className="list-card-acciones">
         <span className="list-card-total">{total}</span>
-        <button
-          className="list-card-boton"
-          onClick={(e) => {
-            e.stopPropagation();
-            setConfirmar(true);
-          }}>
-          Borrar
-        </button>
-        <button
-          className="list-card-boton"
-          onClick={(e) => {
-            e.stopPropagation();
-            setEditando(true);
-          }}>
-          Editar
-        </button>
-        {editando && (
+        {!editando && !confirmar && (
           <button
             className="list-card-boton"
             onClick={(e) => {
               e.stopPropagation();
+              setListaEnEdicion(lista.id);
+              setNombreEditado(lista.nombre);
+            }}>
+            Editar
+          </button>
+        )}
+        {editando && !confirmar && (
+          <button
+            className="list-card-boton list-card-boton-guardar"
+            onClick={(e) => {
+              e.stopPropagation();
               onEditar(lista.id, nombreEditado);
-              setEditando(false);
+              setListaEnEdicion(null);
             }}>
             Guardar
+          </button>
+        )}
+        {!confirmar && (
+          <button
+            className="list-card-boton list-card-boton-borrar"
+            onClick={(e) => {
+              e.stopPropagation();
+              setConfirmar(true);
+            }}>
+            Borrar
+          </button>
+        )}
+        {editando && !confirmar && (
+          <button className="entrada-boton" onClick={() => {
+            setNombreEditado(lista.nombre);
+            setListaEnEdicion(null);
+          }}>
+            Cancelar
           </button>
         )}
         {confirmar && (
           <div className="list-card-confirmar">
             <button
-              className="list-card-boton list-card-boton-peligro"
+              className="list-card-boton list-card-boton-confirmar"
               onClick={(e) => {
                 e.stopPropagation();
                 onBorrar(lista.id);

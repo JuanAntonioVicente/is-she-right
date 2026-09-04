@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import "./App.css";
 import Summary from "./components/Summary.jsx";
 import ListCard from "./components/ListCard.jsx";
@@ -12,6 +12,8 @@ function App() {
   const [entradas, setEntradas] = useState([]);
   const [listaSeleccionada, setListaSeleccionada] = useState(null);
   const [mes, setMes] = useState(new Date());
+  const [entradaEnEdicion, setEntradaEnEdicion] = useState(null);
+  const [listaEnEdicion, setListaEnEdicion] = useState(null);
   function agregarLista(nombre, color) {
     const nuevaLista = {
       id: Date.now(),
@@ -87,6 +89,8 @@ function App() {
             onSeleccionar={setListaSeleccionada}
             onBorrar={borrarLista}
             onEditar={editarLista}
+            listaEnEdicion={listaEnEdicion}
+            setListaEnEdicion={setListaEnEdicion}
           />
         ))}
       </div>
@@ -95,7 +99,8 @@ function App() {
         <div className="entradas-panel" style={{ borderLeft: "3px solid" + listaActual.color }}>
           <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
-            <EntryCard key={entrada.id} entrada={entrada} onBorrar={borrarEntrada} onEditar={editarEntradas} />
+            <EntryCard key={entrada.id} entrada={entrada} onBorrar={borrarEntrada}
+              onEditar={editarEntradas} entradaEnEdicion={entradaEnEdicion} setEntradaEnEdicion={setEntradaEnEdicion} />
           ))}
           <EntryForm onCrear={agregarEntrada} />
         </div>

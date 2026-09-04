@@ -85,11 +85,16 @@
   background-color: transparent;
   border: 1px solid #2f333c;
   border-radius: 6px;
-  color: #6b6f77;
+  color: #8b8f96;
   font-family: inherit;
   font-size: 12px;
   padding: 4px 10px;
   cursor: pointer;
+}
+
+.entrada-guardar:hover {
+  border-color: #4CAF50;
+  color: #4CAF50;
 }
 
 .entrada-borrar:hover {

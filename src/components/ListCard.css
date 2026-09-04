@@ -16,7 +16,7 @@
 .list-card-acciones {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .list-card-total {
@@ -42,14 +42,24 @@
   color: #9b8ef0;
 }
 
-.list-card-boton-peligro:hover {
+.list-card-boton-borrar:hover {
   border-color: #E24B4A;
   color: #E24B4A;
 }
 
+.list-card-boton-confirmar:hover {
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+
+.list-card-boton-guardar:hover {
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+
 .list-card-confirmar {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .list-card-input {

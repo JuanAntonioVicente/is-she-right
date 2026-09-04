@@ -1,15 +1,20 @@
 import { useState } from "react";
 import "./ListForm.css";
 
+const colores = ["#4A9DD9", "#E24B4A", "#5CB85C", "#EF9F27", "#9B59B6", "#1ABC9C", "#E91E63", "#F5C518"];
+function colorRandom() {
+    return colores[Math.floor(Math.random() * colores.length)];
+}
 function ListForm({ onCrear }) {
     const [nombre, setNombre] = useState("");
-    const [color, setColor] = useState("#4A9DD9");
+    const [color, setColor] = useState(colorRandom);
     function handleSubmit() {
         if (nombre.trim() === "") {
             return;
         }
         onCrear(nombre, color);
         setNombre("");
+        setColor(colorRandom);
     }
     return (
         <div className="list-form">

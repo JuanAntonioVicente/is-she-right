@@ -5,6 +5,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
   const [nombreEditado, setNombreEditado] = useState(entrada.nombre);
   const [fechaEditada, setFechaEditada] = useState(entrada.fecha);
   const [puntuacionEditada, setPuntuacionEditada] = useState(entrada.puntuacion);
+  const [confirmar, setConfirmar] = useState(false);
   const editar = entradaEnEdicion === entrada.id;
   return (
     <div className="entrada-fila">
@@ -38,7 +39,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
       )}
 
       <span className="entrada-derecha">
-        {!editar && (
+        {!editar && !confirmar && (
           <button className="entrada-boton" onClick={() => {
             setEntradaEnEdicion(entrada.id);
             setNombreEditado(entrada.nombre);
@@ -48,7 +49,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
             Editar
           </button>
         )}
-        {editar && (
+        {editar && !confirmar && (
           <button
             className="entrada-boton entrada-guardar"
             onClick={() => {
@@ -58,10 +59,14 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
             Guardar
           </button>
         )}
-        <button className="entrada-borrar" onClick={() => onBorrar(entrada.id)}>
+        {!confirmar && (
+        <button className="entrada-borrar" onClick={() => {
+          setConfirmar(true);
+        }}>
           Borrar
         </button>
-        {editar && (
+        )}
+        {editar && !confirmar && (
           <button className="entrada-boton" onClick={() => {
             setNombreEditado(entrada.nombre);
             setFechaEditada(entrada.fecha);
@@ -71,7 +76,25 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
             Cancelar
           </button>
         )}
-
+        {confirmar && (
+          <div className="entrada-confirmar">
+            <button
+              className="entrada-boton entrada-boton-confirmar"
+              onClick={() => {
+                onBorrar(entrada.id);
+                setConfirmar(false);
+              }}>
+              Confirmar
+            </button>
+            <button
+              className="entrada-boton"
+              onClick={() => {
+                setConfirmar(false);
+              }}>
+              Cancelar
+            </button>
+          </div>
+        )}
       </span>
     </div>
   );

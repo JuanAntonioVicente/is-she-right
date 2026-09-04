@@ -101,3 +101,13 @@
   color: #E24B4A;
   border-color: #E24B4A;
 }
+
+.entrada-confirmar {
+  display: flex;
+  gap: 8px;
+}
+
+.entrada-boton-confirmar:hover {
+  border-color: #4CAF50;
+  color: #4CAF50;
+}

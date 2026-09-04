@@ -8,7 +8,7 @@ function EntryForm({ onCrear }) {
     const [puntuacion, setPuntuacion] = useState("");
     const [error, setError] = useState("");
     function handleSubmit() {
-        if (fecha === "" || nombre === "" || puntuacion === "" ||
+        if (fecha === "" || nombre === "" ||
             Number(puntuacion) < 0 || Number(puntuacion) > 10) {
             setError("Debes poner una fecha, nombre y puntuación correctas.");
             return;
@@ -26,10 +26,10 @@ function EntryForm({ onCrear }) {
             <input className="entry-form-input" type="text"
                 placeholder="Nombre de la entrada" value={nombre} onChange={(e) => setNombre(e.target.value)} />
             <input className="entry-form-input entry-form-tiempo"
-                placeholder="Horas" type="number" min="0" max="" value={tiempo}
+                placeholder="Horas" type="number" min="0" value={tiempo}
                 onChange={(e) => setTiempo(e.target.value)} />
             <input className="entry-form-input entry-form-puntuacion"
-                placeholder="0 - 10" type="number" min="0" value={puntuacion}
+                placeholder="0 - 10" type="number" min="0" max="10" value={puntuacion}
                 onChange={(e) => setPuntuacion(e.target.value)} />
             <button className="entry-form-boton" onClick={handleSubmit}>Añadir entrada</button>
             {error && <p className="entry-form-error">{error}</p>}

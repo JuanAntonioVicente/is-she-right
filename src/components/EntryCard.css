@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 7px 0;
   border-bottom: 1px solid #23262e;
@@ -49,6 +50,7 @@
   align-items: center;
   gap: 8px;
   flex: 1;
+  min-width: 0;
 }
 
 .entrada-input {
@@ -60,6 +62,7 @@
   font-family: inherit;
   font-size: 13px;
   padding: 5px 8px;
+  min-width: 0;
 }
 
 .entrada-input:focus {
@@ -69,10 +72,12 @@
 
 .entrada-input-puntuacion {
   width: 60px;
+  flex-shrink: 0;
 }
 
 .entrada-input-tiempo {
   width: 60px;
+  flex-shrink: 0;
 }
 
 .entrada-boton {
@@ -120,4 +125,11 @@
 .entrada-boton-confirmar:hover {
   border-color: #4CAF50;
   color: #4CAF50;
+}
+
+.entrada-error {
+  color: #E24B4A;
+  font-size: 12px;
+  width: 100%;
+  margin: 0;
 }

@@ -7,6 +7,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
   const [tiempoEditado, setTiempoEditado] = useState(entrada.tiempo);
   const [puntuacionEditada, setPuntuacionEditada] = useState(entrada.puntuacion);
   const [confirmar, setConfirmar] = useState(false);
+  const [error, setError] = useState("");
   const editar = entradaEnEdicion === entrada.id;
   return (
     <div className="entrada-fila">
@@ -26,13 +27,17 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
           />
           <input
             className="entrada-input entrada-input-tiempo"
+            placeholder="Horas"
             type="number"
+            min="0"
             value={tiempoEditado}
             onChange={(e) => setTiempoEditado(e.target.value)}
           />
           <input
             className="entrada-input entrada-input-puntuacion"
+            placeholder="0 - 10"
             type="number"
+            min="0" max="10"
             value={puntuacionEditada}
             onChange={(e) => setPuntuacionEditada(e.target.value)}
           />
@@ -62,8 +67,14 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
           <button
             className="entrada-boton entrada-guardar"
             onClick={() => {
+              if (fechaEditada === "" || nombreEditado === "" ||
+                Number(puntuacionEditada) < 0 || Number(puntuacionEditada) > 10) {
+                setError("Debes poner una fecha, nombre y puntuación correctas.");
+                return;
+              }
               onEditar(entrada.id, fechaEditada, nombreEditado, tiempoEditado, puntuacionEditada);
               setEntradaEnEdicion(null);
+              setError("");
             }}>
             Guardar
           </button>
@@ -71,6 +82,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
         {!confirmar && (
           <button className="entrada-borrar" onClick={() => {
             setConfirmar(true);
+            setError("");
           }}>
             Borrar
           </button>
@@ -82,6 +94,7 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
             setTiempoEditado(entrada.tiempo);
             setPuntuacionEditada(entrada.puntuacion);
             setEntradaEnEdicion(null);
+            setError("");
           }}>
             Cancelar
           </button>
@@ -103,9 +116,11 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
               }}>
               Cancelar
             </button>
+            {error && <p className="entry-form-error">{error}</p>}
           </div>
         )}
       </span>
+      {error && <p className="entrada-error">{error}</p>}
     </div>
   );
 }

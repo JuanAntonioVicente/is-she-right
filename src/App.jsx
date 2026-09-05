@@ -43,7 +43,9 @@ function App() {
       setListaSeleccionada(null);
     }
   }
-  const entradasFiltradas = entradas.filter((entrada) => entrada.listaId === listaSeleccionada);
+  const entradasFiltradas = entradas
+    .filter((entrada) => entrada.listaId === listaSeleccionada)
+    .sort((a, b) => b.fecha.localeCompare(a.fecha));
   function editarLista(id, nuevoNombre) {
     setListas(
       listas.map((lista) => {

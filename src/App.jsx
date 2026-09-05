@@ -89,6 +89,7 @@ function App() {
             lista={lista}
             entradas={entradas}
             onSeleccionar={setListaSeleccionada}
+            listaSeleccionada={listaSeleccionada}
             onBorrar={borrarLista}
             onEditar={editarLista}
             listaEnEdicion={listaEnEdicion}
@@ -97,7 +98,7 @@ function App() {
         ))}
       </div>
       <ListForm onCrear={agregarLista} />
-      {listaSeleccionada && (
+      {listaSeleccionada ? (
         <div className="entradas-panel" style={{ borderLeft: "3px solid" + listaActual.color }}>
           <div className="entradas-titulo">Entradas</div>
           {entradasFiltradas.map((entrada) => (
@@ -106,6 +107,10 @@ function App() {
           ))}
           <EntryForm onCrear={agregarEntrada} />
         </div>
+      ) : (
+        listas.length > 0 && (
+          <p className="app-sin-seleccion">Selecciona una lista para ver y añadir entradas</p>
+        )
       )}
       <Summary listas={listas} entradas={entradas} mes={mes} />
       <Calendar listas={listas} entradas={entradas} mes={mes} setMes={setMes} />

@@ -37,6 +37,14 @@
   cursor: pointer;
 }
 
+.list-card-activa {
+  background-color: #262b3a;
+}
+
+.list-card:hover {
+  background-color: #22262f;
+}
+
 .list-card-boton:hover {
   border-color: #6d5ce7;
   color: #9b8ef0;

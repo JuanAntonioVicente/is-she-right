@@ -24,6 +24,17 @@
   margin: 1.5rem 0 0.75rem 0;
 }
 
+.app-sin-seleccion {
+  background-color: #1a1d24;
+  border: 1px dashed #2f333c;
+  border-radius: 8px;
+  padding: 24px 16px;
+  margin-bottom: 1.75rem;
+  text-align: center;
+  color: #8b8f96;
+  font-size: 14px;
+}
+
 .app-listas {
   margin-bottom: 1.75rem;
 }

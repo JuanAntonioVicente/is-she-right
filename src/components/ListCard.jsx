@@ -1,15 +1,16 @@
 import { useState } from "react";
 import "./ListCard.css";
 
-function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar, listaEnEdicion, setListaEnEdicion }) {
+function ListCard({ lista, entradas, onSeleccionar, onBorrar, onEditar, listaEnEdicion, setListaEnEdicion, listaSeleccionada }) {
   const total = entradas.filter((entrada) => entrada.listaId === lista.id).length;
   const [nombreEditado, setNombreEditado] = useState(lista.nombre);
   const [confirmar, setConfirmar] = useState(false);
   const editando = listaEnEdicion === lista.id;
+  const seleccionada = listaSeleccionada === lista.id;
   return (
     <div
       onClick={() => onSeleccionar(lista.id)}
-      className="list-card"
+      className={"list-card " + (seleccionada ? "list-card-activa" : "" )}
       style={{ borderLeft: "4px solid " + lista.color }}>
       {editando ? (
         <input

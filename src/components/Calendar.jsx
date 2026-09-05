@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./Calendar.css";
 
-function Calendar({ listas, entradas, mes, setMes}) {
+function Calendar({ listas, entradas, mes, setMes }) {
     function mesAnterior() {
         setMes(new Date(mes.getFullYear(), mes.getMonth() - 1, 1))
     }
@@ -15,6 +16,7 @@ function Calendar({ listas, entradas, mes, setMes}) {
     const diaHoy = hoy.getDate();
     const diasDelMes = new Date(year, numeroMes + 1, 0).getDate()
     const dias = [];
+    const [entradaMostrada, setEntradaMostrada] = useState(null);
     for (let i = 1; i <= diasDelMes; i++) {
         dias.push(i);
     }
@@ -63,8 +65,18 @@ function Calendar({ listas, entradas, mes, setMes}) {
                             {encontrarEntradas.map((entradaDelDia) => {
                                 const laLista = listas.find((lista) => lista.id === entradaDelDia.listaId);
                                 return (
-                                    <div className="calendar-marca" key={entradaDelDia.id}
-                                        style={{ backgroundColor: laLista.color }}></div>
+                                    <div className="calendar-marca-contenedor" key={entradaDelDia.id}>
+                                        {entradaMostrada && entradaMostrada.id === entradaDelDia.id && (
+                                            <div className="calendar-tooltip">
+                                                {entradaMostrada.fecha + " - " + entradaMostrada.nombre + " - "
+                                                    + entradaMostrada.tiempo + " - " + entradaMostrada.puntuacion}
+                                            </div>
+                                        )}
+                                        <div className="calendar-marca"
+                                            onMouseEnter={() => setEntradaMostrada(entradaDelDia)}
+                                            onMouseLeave={() => setEntradaMostrada(null)}
+                                            style={{ backgroundColor: laLista.color }}></div>
+                                    </div>
                                 );
                             })}
                         </div>

@@ -68,8 +68,18 @@ function Calendar({ listas, entradas, mes, setMes }) {
                                     <div className="calendar-marca-contenedor" key={entradaDelDia.id}>
                                         {entradaMostrada && entradaMostrada.id === entradaDelDia.id && (
                                             <div className="calendar-tooltip">
-                                                {entradaMostrada.fecha + " - " + entradaMostrada.nombre + " - "
-                                                    + entradaMostrada.tiempo + " - " + entradaMostrada.puntuacion}
+                                                <span className="calendar-entrada-fecha">{entradaMostrada.fecha}</span>
+                                                <span className="calendar-entrada-nombre">{entradaMostrada.nombre}</span>
+                                                {entradaMostrada.tiempo && (
+                                                    <span className="calendar-entrada-tiempo">{entradaMostrada.tiempo}
+                                                        <span className="entrada-hora">h</span>
+                                                    </span>
+                                                )}
+                                                {entradaMostrada.puntuacion && (
+                                                    <span className="calendar-entrada-puntuacion">{entradaMostrada.puntuacion}
+                                                        <span className="entrada-estrella">★</span>
+                                                    </span>
+                                                )}
                                             </div>
                                         )}
                                         <div className="calendar-marca"

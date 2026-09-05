@@ -46,8 +46,12 @@ function EntryCard({ entrada, onBorrar, onEditar, entradaEnEdicion, setEntradaEn
         <span className="entrada-texto">
           <span className="entrada-fecha">{entrada.fecha}</span>
           <span className="entrada-nombre">{entrada.nombre}</span>
-          <span className="entrada-tiempo">{entrada.tiempo}</span>
-          <span className="entrada-puntuacion">{entrada.puntuacion}</span>
+          {entrada.tiempo && (
+            <span className="entrada-tiempo">{entrada.tiempo}<span className="entrada-hora">h</span></span>
+          )}
+          {entrada.puntuacion && (
+            <span className="entrada-puntuacion">{entrada.puntuacion}<span className="entrada-estrella">★</span></span>
+          )}
         </span>
       )}
 
